@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -7,9 +8,18 @@ import { Component } from '@angular/core';
 })
 export class LoginFormComponent {
 
-  user: any = {}
+  user: {'email': string, 'password': string} = {
+    'email': '',
+    'password': ''
+  };
+
+  constructor(
+    private router: Router,
+  ) { }
 
   onSubmit() {
-    console.log(this.user)
+    // redirect to home page
+    this.router.navigate(['/home']);
+    
   }
 }
