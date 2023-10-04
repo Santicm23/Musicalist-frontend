@@ -19,7 +19,7 @@ export class LoginFormComponent {
 
   onSubmit() {
     // redirect to home page
-    this.router.navigate(['/home']);
+    this.router.navigate(['/home/1']);
     
   }
 }
