@@ -26,11 +26,10 @@ export class LoginComponent {
   ) {}
 
   onSubmit(event: Event) {
-    // redirect to home page
-    this.submitEvent = event
-
     if (this.loginForm.valid) {
       this.router.navigate(['/home/1'])
+    } else {
+      this.submitEvent = event
     }
   }
 }
