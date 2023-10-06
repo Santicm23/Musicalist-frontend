@@ -10,6 +10,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FormInputComponent } from './components/form-input/form-input.component';
+import { ToastWarningComponent } from './components/toast-warning/toast-warning.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FormInputComponent } from './components/form-input/form-input.component
     SignupComponent,
     NotFoundComponent,
     HomeComponent,
-    FormInputComponent
+    FormInputComponent,
+    ToastWarningComponent
   ],
   imports: [
     BrowserModule,
