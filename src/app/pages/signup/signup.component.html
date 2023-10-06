@@ -1,27 +1,38 @@
-<h1 class="text-3xl">{{title}}</h1>
+<main class="flex min-h-screen flex-col align-middle">
+  <div class="my-auto">
 
-<form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <app-form-input
-    [control]="registerForm.controls.nombre"
-    inputId="nombre"
-    label="Nombre"
-  ></app-form-input>
-  <app-form-input
-    [control]="registerForm.controls.email"
-    inputId="email"
-    label="Email"
-    type="email"
-  ></app-form-input>
-  <app-form-input
-    [control]="registerForm.controls.password"
-    inputId="password"
-    label="Password"
-    type="password"
-  ></app-form-input>
-
-  <div>
-    <button type="submit" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">Register</button>
+    <h1 class="text-7xl font-bold tracking-tight text-indigo-500 text-center mb-4">{{ title }}</h1>
+    
+    <div class="space-y-6 w-full mx-auto sm:w-2/4 xl:w-1/3 2xl:1/4 p-4 h-1/2">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <app-form-input
+          [control]="registerForm.controls.nombre"
+          inputId="nombre"
+          label="Nombre"
+        ></app-form-input>
+        <app-form-input
+          [control]="registerForm.controls.email"
+          inputId="email"
+          label="Email"
+          type="email"
+        ></app-form-input>
+        <app-form-input
+          [control]="registerForm.controls.password"
+          inputId="password"
+          label="Password"
+          type="password"
+        ></app-form-input>
+        <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+          Sign up
+        </button>
+      </form>
+  
+      <p class="mt-10 text-center text-sm text-gray-500">
+        Already have an account?
+        <a [routerLink]="['/login']" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+          login
+        </a>
+      </p>
+    </div>
   </div>
-</form>
-
-<a [routerLink]="['/login']">Login</a>
+</main>
