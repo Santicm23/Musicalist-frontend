@@ -1,4 +1,4 @@
-<h1>{{title}}</h1>
+<h1 class="text-3xl">{{title}}</h1>
 
 <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <app-form-input
@@ -20,7 +20,7 @@
   ></app-form-input>
 
   <div>
-    <button type="submit" class="button">Register</button>
+    <button type="submit" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">Register</button>
   </div>
 </form>
 

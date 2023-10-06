@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
 
@@ -12,9 +13,14 @@ export class LoginComponent {
 
   user: Usuario = new Usuario(0, '', '', '', '');
   
+  loginForm = this.fb.group({
+    password: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+  });
 
   constructor(
     private router: Router,
+    private fb: FormBuilder
   ) { }
 
   onSubmit() {

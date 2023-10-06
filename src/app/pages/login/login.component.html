@@ -1,18 +1,19 @@
 <h1>{{ title }}</h1>
-<h1 class="text-3xl font-bold underline">
-  Hello world!
-</h1>
 
-<form (ngSubmit)="onSubmit()" #form="ngForm">
-  <div>
-    <label for="email">Email</label>
-    <input type="email" [(ngModel)]="user.email" name="email" required>
-  </div>
-  <div class="bg-black text-green-950">
-    <label for="password">Password</label>
-    <input type="password" [(ngModel)]="user.password" name="password" required>
-  </div>
-  <button type="submit" [disabled]="form.invalid">Login</button>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" #form="ngForm">
+  <app-form-input
+    [control]="loginForm.controls.email"
+    inputId="email"
+    label="Email"
+    type="email"
+  ></app-form-input>
+  <app-form-input
+    [control]="loginForm.controls.password"
+    inputId="password"
+    label="Password"
+    type="password"
+  ></app-form-input>
+  <button type="submit" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">Login</button>
 </form>
 
 <a [routerLink]="['/signup']">Register</a>
