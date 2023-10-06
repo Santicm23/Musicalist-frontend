@@ -1,0 +1,11 @@
+<div class="form-control">
+  <label [for]="inputId">{{ label }}</label>
+  <input
+    [formControl]="control"
+    [type]="type"
+    [id]="inputId"
+  >
+  <ng-container *ngIf="control.invalid && control.dirty && control.touched">
+
+  </ng-container>
+</div>
