@@ -13,7 +13,7 @@ export class LoginComponent {
 
   user: Usuario = new Usuario(0, '', '', '', '')
 
-  submitted = false
+  submitEvent: Event | null = null
 
   loginForm = this.fb.group({
     password: ['', Validators.required],
@@ -25,9 +25,10 @@ export class LoginComponent {
     private fb: FormBuilder
   ) {}
 
-  onSubmit() {
+  onSubmit(event: Event) {
     // redirect to home page
-    this.submitted = true
+    this.submitEvent = event
+
     if (this.loginForm.valid) {
       this.router.navigate(['/home/1'])
     }
