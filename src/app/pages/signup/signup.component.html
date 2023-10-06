@@ -1,1 +1,19 @@
-<p>signup works!</p>
+<h1>{{title}}</h1>
+
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+  <div>
+    <label for="text">Nombre</label>
+    <input type="text" [(ngModel)]="user.nombre" name="nombre" required>
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input type="email" [(ngModel)]="user.email" name="email" required>
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" [(ngModel)]="user.password" name="password" required>
+  </div>
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>
+
+<a [routerLink]="['/login']">Login</a>

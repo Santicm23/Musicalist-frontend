@@ -3,6 +3,7 @@ export class Usuario {
     public id: number,
     public nombre: string,
     public email: string,
-    public rol: string
+    public password: string,
+    public rol: string = 'USER',
   ) { }
 }
