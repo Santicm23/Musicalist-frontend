@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core'
+import { Component, Input, OnChanges } from '@angular/core'
 
 @Component({
   selector: 'app-toast-warning',
@@ -31,7 +31,6 @@ export class ToastWarningComponent implements OnChanges {
       }, 5000)
 
       this.show()
-      console.log('a')
     }
   }
 

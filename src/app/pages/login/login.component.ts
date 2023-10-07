@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Usuario } from 'src/app/models/usuario'
+import { UsuarioService } from 'src/app/services/usuario.service'
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,6 @@ import { Usuario } from 'src/app/models/usuario'
 })
 export class LoginComponent {
   title = 'Musicalist!'
-
-  user: Usuario = new Usuario(0, '', '', '', '')
 
   submitEvent: Event | null = null
 
@@ -22,12 +21,23 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private usuarioService: UsuarioService
   ) {}
 
   onSubmit(event: Event) {
     if (this.loginForm.valid) {
-      this.router.navigate(['/home/1'])
+      const correo = this.loginForm.value.email!
+      const password = this.loginForm.value.password!
+      this.usuarioService
+        .login(correo, password)
+        .then(({ id }) => {
+          this.router.navigate([`/home/${id}`])
+        })
+        .catch(err => {
+          console.log(err)
+          this.submitEvent = event
+        })
     } else {
       this.submitEvent = event
     }
