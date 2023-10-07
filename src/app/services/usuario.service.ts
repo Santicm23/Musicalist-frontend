@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import axios from 'axios'
+import { Usuario } from '../models/usuario'
 
 @Injectable({
   providedIn: 'root',
@@ -7,8 +8,13 @@ import axios from 'axios'
 export class UsuarioService {
   constructor() {}
 
-  async login(correo: string, password: string) {
-    const res = await axios.post('http://localhost:8080/login', { correo, password })
+  async login(correo: string, contrasena: string): Promise<Usuario> {
+    const res = await axios.post('http://localhost:8080/login', { correo, contrasena })
+    return res.data
+  }
+
+  async registro(nombre: string, correo: string, contrasena: string): Promise<Usuario> {
+    const res = await axios.post('http://localhost:8080/usuario', { nombre, correo, contrasena })
     return res.data
   }
 }

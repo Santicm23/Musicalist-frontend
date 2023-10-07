@@ -12,6 +12,8 @@ import { UsuarioService } from 'src/app/services/usuario.service'
 export class LoginComponent {
   title = 'Musicalist!'
 
+  user: Usuario = new Usuario(0, '', '', '')
+
   submitEvent: Event | null = null
 
   loginForm = this.fb.group({
@@ -25,19 +27,15 @@ export class LoginComponent {
     private usuarioService: UsuarioService
   ) {}
 
-  onSubmit(event: Event) {
+  async onSubmit(event: Event) {
     if (this.loginForm.valid) {
       const correo = this.loginForm.value.email!
       const password = this.loginForm.value.password!
-      this.usuarioService
-        .login(correo, password)
-        .then(({ id }) => {
-          this.router.navigate([`/home/${id}`])
-        })
-        .catch(err => {
-          console.log(err)
-          this.submitEvent = event
-        })
+
+      this.user = await this.usuarioService.login(correo, password)
+      if (this.user.id) {
+        this.router.navigate([`/home/${this.user.id}`])
+      }
     } else {
       this.submitEvent = event
     }
