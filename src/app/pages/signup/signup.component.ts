@@ -11,17 +11,16 @@ import { UsuarioService } from 'src/app/services/usuario.service'
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  title = 'Musicalist!'
+  clickObservable: Observable<Event> = new Observable<Event>()
 
   user: Usuario = new Usuario(0, '', '', '')
-
-  clickObservable: Observable<Event> = new Observable<Event>()
 
   registerForm = this.fb.group({
     nombre: ['', Validators.required],
     password: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
   })
+  error: string = 'Could not register user'
 
   constructor(
     private router: Router,
@@ -41,6 +40,7 @@ export class SignupComponent implements OnInit {
 
       this.user = await this.usuarioService.registro(nombre, email, password)
       this.router.navigate([`/home/${this.user.id}`])
+    } else {
     }
   }
 }

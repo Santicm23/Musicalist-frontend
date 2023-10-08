@@ -8,6 +8,7 @@ import { Observable, Subscription, timer } from 'rxjs'
 })
 export class ToastWarningComponent implements OnInit {
   @Input() eventObservable: Observable<Event> = new Observable<Event>()
+  @Input() message: string = 'Something went wrong!'
   timerObservable: Observable<number> = new Observable<number>()
   timerSubscription: Subscription = new Subscription()
 

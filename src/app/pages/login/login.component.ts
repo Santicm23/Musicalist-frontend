@@ -11,16 +11,15 @@ import { UsuarioService } from 'src/app/services/usuario.service'
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  title = 'Musicalist!'
+  clickObservable: Observable<Event> = new Observable<Event>()
 
   user: Usuario = new Usuario(0, '', '', '')
-
-  clickObservable: Observable<Event> = new Observable<Event>()
 
   loginForm = this.fb.group({
     password: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
   })
+  error: string = 'Could not login user'
 
   constructor(
     private router: Router,
