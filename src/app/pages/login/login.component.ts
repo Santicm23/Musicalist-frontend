@@ -1,6 +1,7 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+import { Observable, fromEvent } from 'rxjs'
 import { Usuario } from 'src/app/models/usuario'
 import { UsuarioService } from 'src/app/services/usuario.service'
 
@@ -9,12 +10,12 @@ import { UsuarioService } from 'src/app/services/usuario.service'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   title = 'Musicalist!'
 
   user: Usuario = new Usuario(0, '', '', '')
 
-  submitEvent: Event | null = null
+  clickObservable: Observable<Event> = new Observable<Event>()
 
   loginForm = this.fb.group({
     password: ['', Validators.required],
@@ -27,7 +28,11 @@ export class LoginComponent {
     private usuarioService: UsuarioService
   ) {}
 
-  async onSubmit(event: Event) {
+  ngOnInit(): void {
+    this.clickObservable = fromEvent(document.getElementById('btn-login')!, 'click')
+  }
+
+  async onSubmit() {
     if (this.loginForm.valid) {
       const correo = this.loginForm.value.email!
       const password = this.loginForm.value.password!
@@ -36,8 +41,6 @@ export class LoginComponent {
       if (this.user.id) {
         this.router.navigate([`/home/${this.user.id}`])
       }
-    } else {
-      this.submitEvent = event
     }
   }
 }

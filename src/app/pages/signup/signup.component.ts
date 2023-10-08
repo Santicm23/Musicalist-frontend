@@ -1,6 +1,7 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+import { Observable, fromEvent } from 'rxjs'
 import { Usuario } from 'src/app/models/usuario'
 import { UsuarioService } from 'src/app/services/usuario.service'
 
@@ -9,12 +10,12 @@ import { UsuarioService } from 'src/app/services/usuario.service'
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   title = 'Musicalist!'
 
   user: Usuario = new Usuario(0, '', '', '')
 
-  submitEvent: Event | null = null
+  clickObservable: Observable<Event> = new Observable<Event>()
 
   registerForm = this.fb.group({
     nombre: ['', Validators.required],
@@ -28,7 +29,11 @@ export class SignupComponent {
     private usuarioService: UsuarioService
   ) {}
 
-  async onSubmit(event: Event) {
+  ngOnInit(): void {
+    this.clickObservable = fromEvent(document.getElementById('btn-signup')!, 'click')
+  }
+
+  async onSubmit() {
     if (this.registerForm.valid) {
       const nombre = this.registerForm.value.nombre!
       const email = this.registerForm.value.email!
@@ -36,8 +41,6 @@ export class SignupComponent {
 
       this.user = await this.usuarioService.registro(nombre, email, password)
       this.router.navigate([`/home/${this.user.id}`])
-    } else {
-      this.submitEvent = event
     }
   }
 }
