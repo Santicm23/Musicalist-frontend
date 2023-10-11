@@ -5,7 +5,7 @@
     <li class="mr-2">
       <button
         [class]="selected === 'generos' ? activeStyles : inactiveStyles"
-        (click)="selected = 'generos'"
+        (click)="setSelected('generos')"
       >
         Generos
       </button>
@@ -13,7 +13,7 @@
     <li class="mr-2">
       <button
         [class]="selected === 'canciones' ? activeStyles : inactiveStyles"
-        (click)="selected = 'canciones'"
+        (click)="setSelected('canciones')"
       >
         Canciones
       </button>

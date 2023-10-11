@@ -13,7 +13,9 @@ import { FormInputComponent } from './components/form-input/form-input.component
 import { ToastWarningComponent } from './components/toast-warning/toast-warning.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { TitleComponent } from './components/title/title.component';
-import { HeaderAdminComponent } from './components/header-admin/header-admin.component'
+import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
+import { TableGenerosComponent } from './components/table-generos/table-generos.component';
+import { TableCancionesComponent } from './components/table-canciones/table-canciones.component'
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { HeaderAdminComponent } from './components/header-admin/header-admin.com
     AdminComponent,
     TitleComponent,
     HeaderAdminComponent,
+    TableGenerosComponent,
+    TableCancionesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
