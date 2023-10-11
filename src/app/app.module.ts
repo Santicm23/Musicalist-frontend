@@ -11,7 +11,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component'
 import { HomeComponent } from './pages/home/home.component'
 import { FormInputComponent } from './components/form-input/form-input.component'
 import { ToastWarningComponent } from './components/toast-warning/toast-warning.component';
-import { AdminComponent } from './pages/admin/admin.component'
+import { AdminComponent } from './pages/admin/admin.component';
+import { TitleComponent } from './components/title/title.component'
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AdminComponent } from './pages/admin/admin.component'
     FormInputComponent,
     ToastWarningComponent,
     AdminComponent,
+    TitleComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],

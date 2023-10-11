@@ -1,7 +1,7 @@
 <main class="flex min-h-screen flex-col align-middle">
   <app-toast-warning [eventObservable]="clickObservable" [message]="error"></app-toast-warning>
   <div class="my-auto">
-    <h1 class="mb-4 text-center text-7xl font-bold tracking-tight text-indigo-500">Musicalist!</h1>
+    <app-title></app-title>
 
     <div class="2xl:1/4 mx-auto h-1/2 w-full space-y-6 p-4 sm:w-2/4 xl:w-1/3">
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
