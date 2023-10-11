@@ -13,7 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service'
 export class LoginComponent implements OnInit {
   clickObservable: Observable<Event> = new Observable<Event>()
 
-  user: Usuario = new Usuario(0, '', '', '')
+  private user: Usuario = new Usuario()
 
   loginForm = this.fb.group({
     password: ['', Validators.required],
@@ -33,12 +33,17 @@ export class LoginComponent implements OnInit {
 
   async onSubmit() {
     if (this.loginForm.valid) {
-      const correo = this.loginForm.value.email!
-      const password = this.loginForm.value.password!
+      this.user.email = this.loginForm.value.email!
+      this.user.password = this.loginForm.value.password!
 
-      this.user = await this.usuarioService.login(correo, password)
+      this.user = await this.usuarioService.login(this.user)
+
       if (this.user.id) {
-        this.router.navigate([`/home/${this.user.id}`])
+        if (this.user.admin) {
+          this.router.navigate([`/admin/${this.user.id}`])
+        } else {
+          this.router.navigate([`/home/${this.user.id}`])
+        }
       }
     }
   }

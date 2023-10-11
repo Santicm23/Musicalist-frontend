@@ -13,7 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service'
 export class SignupComponent implements OnInit {
   clickObservable: Observable<Event> = new Observable<Event>()
 
-  user: Usuario = new Usuario(0, '', '', '')
+  private user: Usuario = new Usuario()
 
   registerForm = this.fb.group({
     nombre: ['', Validators.required],
@@ -34,13 +34,15 @@ export class SignupComponent implements OnInit {
 
   async onSubmit() {
     if (this.registerForm.valid) {
-      const nombre = this.registerForm.value.nombre!
-      const email = this.registerForm.value.email!
-      const password = this.registerForm.value.password!
+      this.user.nombre = this.registerForm.value.nombre!
+      this.user.email = this.registerForm.value.email!
+      this.user.password = this.registerForm.value.password!
 
-      this.user = await this.usuarioService.registro(nombre, email, password)
-      this.router.navigate([`/home/${this.user.id}`])
-    } else {
+      this.user = await this.usuarioService.registro(this.user)
+
+      if (this.user.id) {
+        this.router.navigate([`/home/${this.user.id}`])
+      }
     }
   }
 }
