@@ -6,7 +6,7 @@ export class Cancion {
     public nombre: string,
     public artista: string,
     public album: string,
-    public duracion: Time,
+    public duracion: string,
     public genero: string,
     public fecha: Date,
     public imagen?: string
