@@ -12,7 +12,8 @@ import { HomeComponent } from './pages/home/home.component'
 import { FormInputComponent } from './components/form-input/form-input.component'
 import { ToastWarningComponent } from './components/toast-warning/toast-warning.component';
 import { AdminComponent } from './pages/admin/admin.component';
-import { TitleComponent } from './components/title/title.component'
+import { TitleComponent } from './components/title/title.component';
+import { HeaderAdminComponent } from './components/header-admin/header-admin.component'
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { TitleComponent } from './components/title/title.component'
     ToastWarningComponent,
     AdminComponent,
     TitleComponent,
+    HeaderAdminComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
