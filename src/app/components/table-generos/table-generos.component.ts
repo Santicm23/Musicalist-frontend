@@ -14,4 +14,24 @@ export class TableGenerosComponent {
     new Genero(4, 'Reguetón', 'De Puerto Rico'),
     new Genero(5, 'Bachata', 'De República Dominicana'),
   ]
+
+  editId: number = -1
+
+  constructor() {}
+
+  setEditable(genero: Genero): void {
+    this.editId = genero.id
+  }
+
+  createGenero(): void {}
+
+  readGeneros(): void {}
+
+  updateGenero(genero: Genero): void {
+    console.log(genero)
+  }
+
+  deleteGenero(genero: Genero): void {
+    console.log(genero)
+  }
 }

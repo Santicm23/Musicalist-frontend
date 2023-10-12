@@ -15,7 +15,9 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { TitleComponent } from './components/title/title.component';
 import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
 import { TableGenerosComponent } from './components/table-generos/table-generos.component';
-import { TableCancionesComponent } from './components/table-canciones/table-canciones.component'
+import { TableCancionesComponent } from './components/table-canciones/table-canciones.component';
+import { ButtonEditComponent } from './components/button-edit/button-edit.component';
+import { ButtonDeleteComponent } from './components/button-delete/button-delete.component'
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { TableCancionesComponent } from './components/table-canciones/table-canc
     HeaderAdminComponent,
     TableGenerosComponent,
     TableCancionesComponent,
+    ButtonEditComponent,
+    ButtonDeleteComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
