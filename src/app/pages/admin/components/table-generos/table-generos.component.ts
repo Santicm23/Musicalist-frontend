@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { Genero } from 'src/app/models/genero'
 
 @Component({
@@ -7,6 +7,7 @@ import { Genero } from 'src/app/models/genero'
   styleUrls: ['./table-generos.component.css'],
 })
 export class TableGenerosComponent {
+  @Input() openModal: Function = () => {}
   generos: Genero[] = [
     new Genero(1, 'Rock', 'Música de los 80'),
     new Genero(2, 'Salsa', 'Del Caribe'),

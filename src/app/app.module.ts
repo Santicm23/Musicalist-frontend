@@ -19,7 +19,8 @@ import { TableCancionesComponent } from './pages/admin/components/table-cancione
 import { ButtonEditComponent } from './pages/admin/components/button-edit/button-edit.component'
 import { ButtonDeleteComponent } from './pages/admin/components/button-delete/button-delete.component';
 import { ButtonSaveComponent } from './pages/admin/components/button-save/button-save.component';
-import { ButtonCancelComponent } from './pages/admin/components/button-cancel/button-cancel.component'
+import { ButtonCancelComponent } from './pages/admin/components/button-cancel/button-cancel.component';
+import { ModalConfirmComponent } from './pages/admin/components/modal-confirm/modal-confirm.component'
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ButtonCancelComponent } from './pages/admin/components/button-cancel/bu
     ButtonDeleteComponent,
     ButtonSaveComponent,
     ButtonCancelComponent,
+    ModalConfirmComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
