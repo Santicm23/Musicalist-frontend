@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core'
-import { Observable, Subject } from 'rxjs'
+import { Component, Input, Output } from '@angular/core'
+import { Subject } from 'rxjs'
 
 @Component({
   selector: 'app-modal-confirm',
@@ -7,15 +7,25 @@ import { Observable, Subject } from 'rxjs'
   styleUrls: ['./modal-confirm.component.css'],
 })
 export class ModalConfirmComponent {
-  @Input() idSubject: Subject<number | undefined> = new Subject<number | undefined>()
+  @Input() eventDelete: Subject<number | undefined> = new Subject()
+  @Output() eventConfirm: Subject<boolean> = new Subject()
   deleteId?: number
 
   constructor() {}
 
   ngOnInit(): void {
-    this.idSubject.subscribe(id => {
+    this.eventDelete.subscribe(id => {
       this.deleteId = id
-      console.log(id)
     })
+  }
+
+  close() {
+    this.eventConfirm.next(false)
+    this.deleteId = undefined
+  }
+
+  confirm() {
+    this.eventConfirm.next(true)
+    this.deleteId = undefined
   }
 }

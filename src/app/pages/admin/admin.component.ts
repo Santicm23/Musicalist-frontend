@@ -8,7 +8,8 @@ import { Subject } from 'rxjs'
 })
 export class AdminComponent {
   selected: 'generos' | 'canciones' = 'generos'
-  idSubject: Subject<number | undefined> = new Subject<number | undefined>()
+  eventDelete: Subject<number | undefined> = new Subject()
+  eventConfirm: Subject<boolean> = new Subject()
 
   constructor() {}
 
@@ -17,6 +18,10 @@ export class AdminComponent {
   }
 
   openModal(id?: number) {
-    this.idSubject.next(id)
+    this.eventDelete.next(id)
+  }
+
+  closeModal(bool: boolean) {
+    this.eventConfirm.next(bool)
   }
 }

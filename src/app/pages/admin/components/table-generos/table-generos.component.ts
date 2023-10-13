@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, Input, Output } from '@angular/core'
+import { Subject } from 'rxjs'
 import { Genero } from 'src/app/models/genero'
 
 @Component({
@@ -7,7 +8,8 @@ import { Genero } from 'src/app/models/genero'
   styleUrls: ['./table-generos.component.css'],
 })
 export class TableGenerosComponent {
-  @Output() eventDelete: EventEmitter<number | undefined> = new EventEmitter()
+  @Input() eventConfirm: Subject<boolean> = new Subject()
+  @Output() eventDelete: Subject<number | undefined> = new Subject()
   generos: Genero[] = [
     new Genero(1, 'Rock', 'Música de los 80'),
     new Genero(2, 'Salsa', 'Del Caribe'),
@@ -20,6 +22,13 @@ export class TableGenerosComponent {
   deletingId?: number
 
   constructor() {}
+
+  ngOnInit(): void {
+    this.eventConfirm.subscribe(bool => {
+      if (bool && this.deletingId) this.deleteGenero(this.deletingId)
+      this.deletingId = undefined
+    })
+  }
 
   setEditable(id: number): void {
     this.editingId = id
@@ -52,10 +61,10 @@ export class TableGenerosComponent {
   readGeneros(): void {}
 
   updateGenero(genero: Genero): void {
-    if (genero.id === -1) genero.id = this.generos.length + 1
-
     const inputNombre = document.getElementById(`nombre-${genero.id}`) as HTMLInputElement
     const inputDescripcion = document.getElementById(`descripcion-${genero.id}`) as HTMLInputElement
+
+    if (genero.id === -1) genero.id = this.generos.length + 1
 
     genero.nombre = inputNombre.value
     genero.descripcion = inputDescripcion.value
@@ -64,7 +73,7 @@ export class TableGenerosComponent {
 
   onDelete(id: number): void {
     this.deletingId = id
-    this.eventDelete.emit(id)
+    this.eventDelete.next(id)
   }
 
   deleteGenero(id: number): void {
