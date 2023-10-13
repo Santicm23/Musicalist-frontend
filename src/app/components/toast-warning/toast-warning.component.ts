@@ -17,6 +17,7 @@ export class ToastWarningComponent implements OnInit {
     this.eventObservable.subscribe(() => this.onOpen())
     this.timerObservable = timer(5000)
   }
+
   onOpen(): void {
     this.timerSubscription = this.timerObservable.subscribe(() => {
       this.close()

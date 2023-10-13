@@ -55,7 +55,7 @@
           ></app-button-save>
 
           <app-button-delete
-            (click)="deleteGenero(genero.id)"
+            (click)="onDelete(genero.id)"
             *ngIf="editingId !== genero.id"
           ></app-button-delete>
           <app-button-cancel

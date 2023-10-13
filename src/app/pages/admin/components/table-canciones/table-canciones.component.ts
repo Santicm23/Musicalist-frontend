@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { Cancion } from 'src/app/models/cancion'
 
 @Component({

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { Genero } from 'src/app/models/genero'
 
 @Component({
@@ -7,7 +7,7 @@ import { Genero } from 'src/app/models/genero'
   styleUrls: ['./table-generos.component.css'],
 })
 export class TableGenerosComponent {
-  @Input() openModal: Function = () => {}
+  @Output() eventDelete: EventEmitter<number | undefined> = new EventEmitter()
   generos: Genero[] = [
     new Genero(1, 'Rock', 'Música de los 80'),
     new Genero(2, 'Salsa', 'Del Caribe'),
@@ -60,6 +60,11 @@ export class TableGenerosComponent {
     genero.nombre = inputNombre.value
     genero.descripcion = inputDescripcion.value
     this.editingId = undefined
+  }
+
+  onDelete(id: number): void {
+    this.deletingId = id
+    this.eventDelete.emit(id)
   }
 
   deleteGenero(id: number): void {

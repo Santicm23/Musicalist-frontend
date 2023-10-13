@@ -3,7 +3,10 @@
 
   <app-header-admin (eventSelected)="setSelected($event)"></app-header-admin>
 
-  <app-table-generos *ngIf="selected === 'generos'"></app-table-generos>
+  <app-table-generos
+    *ngIf="selected === 'generos'"
+    (eventDelete)="openModal($event)"
+  ></app-table-generos>
   <app-table-canciones *ngIf="selected === 'canciones'"></app-table-canciones>
-  <!-- <app-modal-confirm></app-modal-confirm> -->
+  <app-modal-confirm [idSubject]="idSubject"></app-modal-confirm>
 </main>
