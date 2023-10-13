@@ -11,33 +11,59 @@ export class TableGenerosComponent {
     new Genero(1, 'Rock', 'Música de los 80'),
     new Genero(2, 'Salsa', 'Del Caribe'),
     new Genero(3, 'Cumbia', 'De Colombia'),
-    new Genero(4, 'Reguetón', 'De Puerto Rico'),
+    new Genero(4, 'Reguetón'),
     new Genero(5, 'Bachata', 'De República Dominicana'),
   ]
 
-  editId: number = -1
+  editingId?: number
+  deletingId?: number
 
   constructor() {}
 
-  setEditable(genero: Genero): void {
-    this.editId = genero.id
-    const inputElement = document.getElementById('input-' + genero.id)
-    inputElement?.focus()
+  setEditable(id: number): void {
+    this.editingId = id
+    const inputElement = document.getElementById(`nombre-${id}`) as HTMLInputElement
+    inputElement.focus()
+  }
+
+  cancelEdit(genero: Genero): void {
+    if (genero.id === -1) {
+      this.deleteGenero(genero.id)
+      return
+    }
+    const inputNombre = document.getElementById(`nombre-${genero.id}`) as HTMLInputElement
+    const inputDescripcion = document.getElementById(`descripcion-${genero.id}`) as HTMLInputElement
+
+    inputNombre.value = genero.nombre
+    inputDescripcion.value = genero.descripcion || ''
+    this.editingId = undefined
   }
 
   createGenero(): void {
-    const nextId = this.generos[this.generos.length - 1].id + 1
-    this.generos.push(new Genero(nextId, '', ''))
-    this.editId = nextId
+    this.generos.push(new Genero(-1, '', ''))
+    this.editingId = -1
+    setTimeout(() => {
+      const inputElement = document.getElementById(`nombre--1`) as HTMLInputElement
+      inputElement.focus()
+    }, 0)
   }
 
   readGeneros(): void {}
 
-  updateGenero(genero: Genero): void {}
+  updateGenero(genero: Genero): void {
+    if (genero.id === -1) genero.id = this.generos.length + 1
 
-  deleteGenero(genero: Genero): void {
-    const index = this.generos.findIndex(g => g.id === genero.id)
+    const inputNombre = document.getElementById(`nombre-${genero.id}`) as HTMLInputElement
+    const inputDescripcion = document.getElementById(`descripcion-${genero.id}`) as HTMLInputElement
+
+    genero.nombre = inputNombre.value
+    genero.descripcion = inputDescripcion.value
+    this.editingId = undefined
+  }
+
+  deleteGenero(id: number): void {
+    const index = this.generos.findIndex(g => g.id === id)
     this.generos.splice(index, 1)
-    this.editId = -1
+    this.editingId = undefined
   }
 }

@@ -19,59 +19,49 @@
       <tr
         [class]="
           'border-b bg-gray-100 dark:border-gray-700 dark:bg-gray-900' +
-          (editId === genero.id ? ' bg-indigo-50' : '')
+          (editingId === genero.id ? ' bg-indigo-50' : '')
         "
         *ngFor="let genero of generos"
       >
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-          {{ genero.id }}
+          {{ genero.id !== -1 ? genero.id : '' }}
         </th>
         <td class="px-6 py-4">
           <input
-            [id]="'input-' + genero.id"
+            [id]="'nombre-' + genero.id"
             type="text"
-            class="w-1/3 min-w-fit bg-transparent outline-none"
+            class="w-full bg-transparent outline-none"
             [value]="genero.nombre"
-            [readonly]="editId !== genero.id"
+            [readonly]="editingId !== genero.id"
           />
         </td>
         <td class="px-6 py-4">
           <input
+            [id]="'descripcion-' + genero.id"
             type="textarea"
-            class="w-2/3 bg-transparent outline-none"
-            [value]="genero.descripcion"
-            [readonly]="editId !== genero.id"
+            class="w-full bg-transparent outline-none"
+            [value]="genero.descripcion || ''"
+            [readonly]="editingId !== genero.id"
           />
         </td>
         <td class="px-6 py-4 [&>*]:mx-1.5">
           <app-button-edit
-            (click)="setEditable(genero)"
-            *ngIf="editId !== genero.id; else saveButton"
+            (click)="setEditable(genero.id)"
+            *ngIf="editingId !== genero.id"
           ></app-button-edit>
-          <ng-template #saveButton>
-            <!-- <app-button-save
-              (click)="updateGenero(genero)"
-              *ngIf="editId === genero.id"
-            ></app-button-save> -->
-            <button class="align-middle">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="fill-green-400 hover:fill-green-600"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
-                />
-              </svg>
-            </button>
-          </ng-template>
+          <app-button-save
+            (click)="updateGenero(genero)"
+            *ngIf="editingId === genero.id"
+          ></app-button-save>
+
           <app-button-delete
-            (click)="deleteGenero(genero)"
-            *ngIf="editId !== genero.id"
+            (click)="deleteGenero(genero.id)"
+            *ngIf="editingId !== genero.id"
           ></app-button-delete>
+          <app-button-cancel
+            (click)="cancelEdit(genero)"
+            *ngIf="editingId === genero.id"
+          ></app-button-cancel>
         </td>
       </tr>
     </tbody>
