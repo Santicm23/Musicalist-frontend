@@ -21,17 +21,23 @@ export class TableGenerosComponent {
 
   setEditable(genero: Genero): void {
     this.editId = genero.id
+    const inputElement = document.getElementById('input-' + genero.id)
+    inputElement?.focus()
   }
 
-  createGenero(): void {}
+  createGenero(): void {
+    const nextId = this.generos[this.generos.length - 1].id + 1
+    this.generos.push(new Genero(nextId, '', ''))
+    this.editId = nextId
+  }
 
   readGeneros(): void {}
 
-  updateGenero(genero: Genero): void {
-    console.log(genero)
-  }
+  updateGenero(genero: Genero): void {}
 
   deleteGenero(genero: Genero): void {
-    console.log(genero)
+    const index = this.generos.findIndex(g => g.id === genero.id)
+    this.generos.splice(index, 1)
+    this.editId = -1
   }
 }

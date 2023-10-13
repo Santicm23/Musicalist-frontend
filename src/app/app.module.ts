@@ -10,14 +10,14 @@ import { SignupComponent } from './pages/signup/signup.component'
 import { NotFoundComponent } from './pages/not-found/not-found.component'
 import { HomeComponent } from './pages/home/home.component'
 import { FormInputComponent } from './components/form-input/form-input.component'
-import { ToastWarningComponent } from './components/toast-warning/toast-warning.component';
-import { AdminComponent } from './pages/admin/admin.component';
-import { TitleComponent } from './components/title/title.component';
-import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
-import { TableGenerosComponent } from './components/table-generos/table-generos.component';
-import { TableCancionesComponent } from './components/table-canciones/table-canciones.component';
-import { ButtonEditComponent } from './components/button-edit/button-edit.component';
-import { ButtonDeleteComponent } from './components/button-delete/button-delete.component'
+import { ToastWarningComponent } from './components/toast-warning/toast-warning.component'
+import { AdminComponent } from './pages/admin/admin.component'
+import { TitleComponent } from './components/title/title.component'
+import { HeaderAdminComponent } from './pages/admin/components/header-admin/header-admin.component'
+import { TableGenerosComponent } from './pages/admin/components/table-generos/table-generos.component'
+import { TableCancionesComponent } from './pages/admin/components/table-canciones/table-canciones.component'
+import { ButtonEditComponent } from './pages/admin/components/button-edit/button-edit.component'
+import { ButtonDeleteComponent } from './pages/admin/components/button-delete/button-delete.component'
 
 @NgModule({
   declarations: [
