@@ -31,6 +31,9 @@ export class TableGenerosComponent {
   }
 
   setEditable(id: number): void {
+    const genero = this.generos.find(g => g.id === this.editingId)
+    if (genero) this.cancelEdit(genero)
+
     this.editingId = id
     const inputElement = document.getElementById(`nombre-${id}`) as HTMLInputElement
     inputElement.focus()
@@ -50,6 +53,7 @@ export class TableGenerosComponent {
   }
 
   createGenero(): void {
+    if (this.editingId === -1) return
     this.generos.push(new Genero(-1, '', ''))
     this.editingId = -1
     setTimeout(() => {
@@ -64,10 +68,11 @@ export class TableGenerosComponent {
     const inputNombre = document.getElementById(`nombre-${genero.id}`) as HTMLInputElement
     const inputDescripcion = document.getElementById(`descripcion-${genero.id}`) as HTMLInputElement
 
-    if (genero.id === -1) genero.id = this.generos.length + 1
-
     genero.nombre = inputNombre.value
     genero.descripcion = inputDescripcion.value
+
+    if (genero.id === -1) genero.id = this.generos.length + 1
+
     this.editingId = undefined
   }
 
