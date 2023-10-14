@@ -8,7 +8,11 @@
     [eventConfirm]="eventConfirm"
     (eventDelete)="openModal($event)"
   ></app-table-generos>
-  <app-table-canciones *ngIf="selected === 'canciones'"></app-table-canciones>
+  <app-table-canciones
+    *ngIf="selected === 'canciones'"
+    [eventConfirm]="eventConfirm"
+    (eventDelete)="openModal($event)"
+  ></app-table-canciones>
   <app-modal-confirm
     [eventDelete]="eventDelete"
     (eventConfirm)="closeModal($event)"
