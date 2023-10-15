@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Observable, Subscription, timer } from 'rxjs'
+import { Observable, Subject, Subscription, timer } from 'rxjs'
 
 @Component({
   selector: 'app-toast-warning',
@@ -7,14 +7,17 @@ import { Observable, Subscription, timer } from 'rxjs'
   styleUrls: ['./toast-warning.component.css'],
 })
 export class ToastWarningComponent implements OnInit {
-  @Input() eventObservable: Observable<Event> = new Observable<Event>()
-  @Input() message: string = 'Something went wrong!'
+  @Input() eventSubject: Subject<string> = new Subject<string>()
+  message: string = 'Algo salió mal!'
   timerObservable: Observable<number> = new Observable<number>()
   timerSubscription: Subscription = new Subscription()
 
   ngOnInit(): void {
     this.close()
-    this.eventObservable.subscribe(() => this.onOpen())
+    this.eventSubject.subscribe(msg => {
+      this.onOpen()
+      this.message = msg
+    })
     this.timerObservable = timer(5000)
   }
 

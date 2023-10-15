@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { Observable, fromEvent } from 'rxjs'
+import { Subject } from 'rxjs'
 import { Usuario } from 'src/app/models/usuario'
 import { UsuarioService } from 'src/app/services/usuario.service'
 
@@ -10,8 +10,8 @@ import { UsuarioService } from 'src/app/services/usuario.service'
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent implements OnInit {
-  clickObservable: Observable<Event> = new Observable<Event>()
+export class SignupComponent {
+  errorSubject: Subject<string> = new Subject<string>()
 
   private user: Usuario = new Usuario()
 
@@ -28,21 +28,20 @@ export class SignupComponent implements OnInit {
     private usuarioService: UsuarioService
   ) {}
 
-  ngOnInit(): void {
-    this.clickObservable = fromEvent(document.getElementById('btn-signup')!, 'click')
-  }
-
   async onSubmit() {
     if (this.registerForm.valid) {
       this.user.nombre = this.registerForm.value.nombre!
       this.user.email = this.registerForm.value.email!
       this.user.password = this.registerForm.value.password!
+      try {
+        this.user = await this.usuarioService.registro(this.user)
 
-      this.user = await this.usuarioService.registro(this.user)
-
-      if (this.user.id) {
         this.router.navigate([`/home/${this.user.id}`])
+      } catch (error) {
+        this.errorSubject.next(this.error)
       }
+    } else {
+      this.errorSubject.next(this.error)
     }
   }
 }

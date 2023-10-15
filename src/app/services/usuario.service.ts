@@ -9,12 +9,16 @@ export class UsuarioService {
   constructor() {}
 
   async login({ email, password }: Usuario): Promise<Usuario> {
-    const res = await axios.post('http://localhost:8080/login', { email, password })
+    const res = await axios.post('http://localhost:8080/login', { correo: email, password })
     return res.data
   }
 
   async registro({ nombre, email, password }: Usuario): Promise<Usuario> {
-    const res = await axios.post('http://localhost:8080/usuario', { nombre, email, password })
+    const res = await axios.post('http://localhost:8080/usuario', {
+      nombre,
+      correo: email,
+      password,
+    })
     return res.data
   }
 }
