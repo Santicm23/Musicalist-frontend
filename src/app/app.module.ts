@@ -21,7 +21,8 @@ import { ButtonDeleteComponent } from './pages/admin/components/button-delete/bu
 import { ButtonSaveComponent } from './pages/admin/components/button-save/button-save.component';
 import { ButtonCancelComponent } from './pages/admin/components/button-cancel/button-cancel.component';
 import { ModalConfirmComponent } from './pages/admin/components/modal-confirm/modal-confirm.component';
-import { CardComponent } from './pages/home/components/card/card.component'
+import { CardComponent } from './pages/home/components/card/card.component';
+import { SearchComponent } from './pages/home/components/search/search.component'
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { CardComponent } from './pages/home/components/card/card.component'
     ButtonCancelComponent,
     ModalConfirmComponent,
     CardComponent,
+    SearchComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],

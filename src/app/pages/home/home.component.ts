@@ -1,22 +1,18 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-  ) { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const id = params['id'];
-      console.log(id);
-    });
+      const id = params['id']
+      console.log(id)
+    })
   }
 }
