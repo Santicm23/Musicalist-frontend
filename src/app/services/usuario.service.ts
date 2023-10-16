@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import axios from 'axios'
 import { Usuario } from '../models/usuario'
+import { Cancion } from '../models/cancion'
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,11 @@ export class UsuarioService {
       correo,
       contrasena,
     })
+    return res.data
+  }
+
+  async getCancionesByUsuario(id: number): Promise<Array<Cancion>> {
+    const res = await axios.get(`http://localhost:8080/usuario/${id}/canciones`)
     return res.data
   }
 }

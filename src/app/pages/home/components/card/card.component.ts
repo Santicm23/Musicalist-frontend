@@ -9,7 +9,7 @@ import { Subject } from 'rxjs'
 export class CardComponent {
   @Input() id: number = 0
   @Input() title: string = ''
-  @Input() img: string = '../../assets/imgs/genero-placeholder.png'
+  @Input() img: string = '../../assets/imgs/placeholder.png'
   @Input() description: string = ''
   @Output() clickEvent: Subject<number> = new Subject()
 

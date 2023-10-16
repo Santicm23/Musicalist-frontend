@@ -13,6 +13,11 @@ export class GeneroService {
     return res.data
   }
 
+  async getGeneroById(id: number): Promise<Genero> {
+    const res = await axios.get(`http://localhost:8080/genero/${id}`)
+    return res.data
+  }
+
   async createGenero(genero: Genero): Promise<Genero> {
     const res = await axios.post('http://localhost:8080/genero', genero)
     return res.data

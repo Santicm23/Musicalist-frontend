@@ -6,12 +6,12 @@
 </button>
 <header class="fixed top-0 -z-20 h-2/3 w-full">
   <h1 class="absolute bottom-32 left-8 text-7xl font-bold tracking-tight text-indigo-500">
-    Genero
+    {{ genero.nombre }}
   </h1>
   <div class="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white"></div>
   <img
     class="m-auto h-full w-full overflow-hidden object-cover"
-    src="../../../assets/imgs/genero-placeholder.png"
+    src="../../../assets/imgs/placeholder.png"
     alt="img"
   />
 </header>
@@ -26,24 +26,11 @@
         />
       </div>
 
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
-      <app-cancion-item></app-cancion-item>
+      <app-cancion-item
+        *ngFor="let cancion of canciones"
+        [cancion]="cancion"
+        [starred]="cancionVotada(cancion.id)"
+      ></app-cancion-item>
     </div>
   </div>
 </main>

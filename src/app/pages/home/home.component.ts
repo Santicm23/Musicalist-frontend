@@ -1,6 +1,5 @@
 import { Component } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Subject } from 'rxjs'
 import { Genero } from 'src/app/models/genero'
 import { GeneroService } from 'src/app/services/genero.service'
 
@@ -10,12 +9,7 @@ import { GeneroService } from 'src/app/services/genero.service'
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  generos: Genero[] = [
-    new Genero(1, 'Rock en español'),
-    new Genero(2, 'Pop'),
-    new Genero(3, 'Funk'),
-    new Genero(4, 'Salsa'),
-  ]
+  generos: Genero[] = []
 
   constructor(
     private router: Router,
@@ -27,6 +21,16 @@ export class HomeComponent {
     this.route.params.subscribe(params => {
       const id = params['uid']
     })
+
+    this.getGeneros()
+  }
+
+  async getGeneros(): Promise<void> {
+    try {
+      this.generos = await this.generoService.getGeneros()
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   onClick(id: number): void {
