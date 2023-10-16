@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { MenuComponent } from './components/menu/menu.component'
 import { LoginComponent } from './pages/login/login.component'
 import { SignupComponent } from './pages/signup/signup.component'
 import { NotFoundComponent } from './pages/not-found/not-found.component'
@@ -17,17 +16,17 @@ import { HeaderAdminComponent } from './pages/admin/components/header-admin/head
 import { TableGenerosComponent } from './pages/admin/components/table-generos/table-generos.component'
 import { TableCancionesComponent } from './pages/admin/components/table-canciones/table-canciones.component'
 import { ButtonEditComponent } from './pages/admin/components/button-edit/button-edit.component'
-import { ButtonDeleteComponent } from './pages/admin/components/button-delete/button-delete.component';
-import { ButtonSaveComponent } from './pages/admin/components/button-save/button-save.component';
-import { ButtonCancelComponent } from './pages/admin/components/button-cancel/button-cancel.component';
-import { ModalConfirmComponent } from './pages/admin/components/modal-confirm/modal-confirm.component';
-import { CardComponent } from './pages/home/components/card/card.component';
-import { SearchComponent } from './pages/home/components/search/search.component'
+import { ButtonDeleteComponent } from './pages/admin/components/button-delete/button-delete.component'
+import { ButtonSaveComponent } from './pages/admin/components/button-save/button-save.component'
+import { ButtonCancelComponent } from './pages/admin/components/button-cancel/button-cancel.component'
+import { ModalConfirmComponent } from './pages/admin/components/modal-confirm/modal-confirm.component'
+import { CardComponent } from './pages/home/components/card/card.component'
+import { SearchComponent } from './pages/home/components/search/search.component';
+import { GeneroComponent } from './pages/genero/genero.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
     LoginComponent,
     SignupComponent,
     NotFoundComponent,
@@ -46,6 +45,7 @@ import { SearchComponent } from './pages/home/components/search/search.component
     ModalConfirmComponent,
     CardComponent,
     SearchComponent,
+    GeneroComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],

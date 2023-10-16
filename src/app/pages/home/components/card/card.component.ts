@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, Output } from '@angular/core'
+import { Subject } from 'rxjs'
 
 @Component({
   selector: 'app-card',
@@ -6,7 +7,15 @@ import { Component, Input } from '@angular/core'
   styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
+  @Input() id: number = 0
   @Input() title: string = ''
   @Input() img: string = '../../assets/imgs/genero-placeholder.png'
   @Input() description: string = ''
+  @Output() clickEvent: Subject<number> = new Subject()
+
+  constructor() {}
+
+  onClick(): void {
+    this.clickEvent.next(this.id)
+  }
 }

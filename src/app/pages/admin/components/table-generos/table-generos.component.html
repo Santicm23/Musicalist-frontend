@@ -45,6 +45,16 @@
             maxlength="100"
           />
         </td>
+        <!-- <td class="px-6 py-4">
+          <img *ngIf="editingId !== cancion.id" class="max-h-8" [src]="cancion.imagen" alt="foto" />
+          <input
+            *ngIf="editingId === cancion.id"
+            [id]="'imagen-' + cancion.id"
+            type="text"
+            class="w-full bg-transparent outline-none"
+            [value]="cancion.imagen || ''"
+          />
+        </td> -->
         <td class="px-6 py-4 [&>*]:mx-1.5">
           <app-button-edit
             (click)="setEditable(genero.id)"
