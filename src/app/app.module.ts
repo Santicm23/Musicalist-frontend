@@ -20,7 +20,8 @@ import { ButtonEditComponent } from './pages/admin/components/button-edit/button
 import { ButtonDeleteComponent } from './pages/admin/components/button-delete/button-delete.component';
 import { ButtonSaveComponent } from './pages/admin/components/button-save/button-save.component';
 import { ButtonCancelComponent } from './pages/admin/components/button-cancel/button-cancel.component';
-import { ModalConfirmComponent } from './pages/admin/components/modal-confirm/modal-confirm.component'
+import { ModalConfirmComponent } from './pages/admin/components/modal-confirm/modal-confirm.component';
+import { CardComponent } from './pages/home/components/card/card.component'
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ModalConfirmComponent } from './pages/admin/components/modal-confirm/mo
     ButtonSaveComponent,
     ButtonCancelComponent,
     ModalConfirmComponent,
+    CardComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
