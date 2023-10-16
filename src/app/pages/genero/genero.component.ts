@@ -14,4 +14,8 @@ export class GeneroComponent {
       const id = params['gid']
     })
   }
+
+  goBack(): void {
+    window.history.back()
+  }
 }

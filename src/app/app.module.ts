@@ -22,7 +22,8 @@ import { ButtonCancelComponent } from './pages/admin/components/button-cancel/bu
 import { ModalConfirmComponent } from './pages/admin/components/modal-confirm/modal-confirm.component'
 import { CardComponent } from './pages/home/components/card/card.component'
 import { SearchComponent } from './pages/home/components/search/search.component';
-import { GeneroComponent } from './pages/genero/genero.component'
+import { GeneroComponent } from './pages/genero/genero.component';
+import { CancionItemComponent } from './components/cancion-item/cancion-item.component'
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { GeneroComponent } from './pages/genero/genero.component'
     CardComponent,
     SearchComponent,
     GeneroComponent,
+    CancionItemComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
