@@ -29,8 +29,8 @@ export class LoginComponent {
 
   async onSubmit() {
     if (this.loginForm.valid) {
-      this.user.email = this.loginForm.value.email!
-      this.user.password = this.loginForm.value.password!
+      this.user.correo = this.loginForm.value.email!
+      this.user.contrasena = this.loginForm.value.password!
 
       try {
         this.user = await this.usuarioService.login(this.user)

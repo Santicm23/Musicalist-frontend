@@ -8,16 +8,16 @@ import { Usuario } from '../models/usuario'
 export class UsuarioService {
   constructor() {}
 
-  async login({ email, password }: Usuario): Promise<Usuario> {
-    const res = await axios.post('http://localhost:8080/login', { correo: email, password })
+  async login({ correo, contrasena }: Usuario): Promise<Usuario> {
+    const res = await axios.post('http://localhost:8080/login', { correo, contrasena })
     return res.data
   }
 
-  async registro({ nombre, email, password }: Usuario): Promise<Usuario> {
+  async registro({ nombre, correo, contrasena }: Usuario): Promise<Usuario> {
     const res = await axios.post('http://localhost:8080/usuario', {
       nombre,
-      correo: email,
-      password,
+      correo,
+      contrasena,
     })
     return res.data
   }

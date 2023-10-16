@@ -31,8 +31,9 @@ export class SignupComponent {
   async onSubmit() {
     if (this.registerForm.valid) {
       this.user.nombre = this.registerForm.value.nombre!
-      this.user.email = this.registerForm.value.email!
-      this.user.password = this.registerForm.value.password!
+      this.user.correo = this.registerForm.value.email!
+      this.user.contrasena = this.registerForm.value.password!
+
       try {
         this.user = await this.usuarioService.registro(this.user)
 
