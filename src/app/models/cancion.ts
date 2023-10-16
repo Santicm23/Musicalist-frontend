@@ -1,5 +1,3 @@
-import { Time } from '@angular/common'
-
 export class Cancion {
   constructor(
     public id: number,

@@ -1,6 +1,7 @@
 import { Component, Input, Output } from '@angular/core'
 import { Subject } from 'rxjs'
 import { Genero } from 'src/app/models/genero'
+import { GeneroService } from 'src/app/services/genero.service'
 
 @Component({
   selector: 'app-table-generos',
@@ -10,20 +11,15 @@ import { Genero } from 'src/app/models/genero'
 export class TableGenerosComponent {
   @Input() eventConfirm: Subject<boolean> = new Subject()
   @Output() eventDelete: Subject<number | undefined> = new Subject()
-  generos: Genero[] = [
-    new Genero(1, 'Rock', 'Música de los 80'),
-    new Genero(2, 'Salsa', 'Del Caribe'),
-    new Genero(3, 'Cumbia', 'De Colombia'),
-    new Genero(4, 'Reguetón'),
-    new Genero(5, 'Bachata', 'De República Dominicana'),
-  ]
+  generos: Genero[] = []
 
   editingId?: number
   deletingId?: number
 
-  constructor() {}
+  constructor(private generoService: GeneroService) {}
 
   ngOnInit(): void {
+    this.readGeneros()
     this.eventConfirm.subscribe(bool => {
       if (bool && this.deletingId) this.deleteGenero(this.deletingId)
       this.deletingId = undefined
@@ -41,7 +37,9 @@ export class TableGenerosComponent {
 
   cancelEdit(genero: Genero): void {
     if (genero.id === -1) {
-      this.deleteGenero(genero.id)
+      const index = this.generos.findIndex(g => g.id === genero.id)
+      this.generos.splice(index, 1)
+      this.editingId = undefined
       return
     }
     const inputNombre = document.getElementById(`nombre-${genero.id}`) as HTMLInputElement
@@ -62,16 +60,23 @@ export class TableGenerosComponent {
     }, 0)
   }
 
-  readGeneros(): void {}
+  async readGeneros(): Promise<void> {
+    this.generos = await this.generoService.getGeneros()
+  }
 
-  updateGenero(genero: Genero): void {
+  async updateGenero(genero: Genero): Promise<void> {
     const inputNombre = document.getElementById(`nombre-${genero.id}`) as HTMLInputElement
     const inputDescripcion = document.getElementById(`descripcion-${genero.id}`) as HTMLInputElement
 
     genero.nombre = inputNombre.value
     genero.descripcion = inputDescripcion.value
 
-    if (genero.id === -1) genero.id = this.generos.length + 1
+    if (genero.id === -1) {
+      const { id } = await this.generoService.createGenero(genero)
+      genero.id = id
+    } else {
+      await this.generoService.updateGenero(genero)
+    }
 
     this.editingId = undefined
   }
@@ -84,6 +89,8 @@ export class TableGenerosComponent {
   deleteGenero(id: number): void {
     const index = this.generos.findIndex(g => g.id === id)
     this.generos.splice(index, 1)
+
+    this.generoService.deleteGenero(id)
     this.editingId = undefined
   }
 }
