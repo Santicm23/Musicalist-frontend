@@ -1,3 +1,5 @@
+import { Genero } from './genero'
+
 export class Cancion {
   constructor(
     public id: number,
@@ -5,8 +7,8 @@ export class Cancion {
     public artista: string,
     public album: string,
     public duracion: string,
-    public genero: string,
-    public fecha: Date,
+    public genero: Genero,
+    public fechaLanzamiento: Date,
     public imagen?: string
   ) {}
 }

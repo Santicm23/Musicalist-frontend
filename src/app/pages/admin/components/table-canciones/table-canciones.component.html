@@ -73,9 +73,9 @@
         <td class="px-6 py-4">
           <input
             [id]="'genero-' + cancion.id"
-            type="text"
+            [type]="editingId === cancion.id ? 'number' : 'text'"
             class="w-full bg-transparent outline-none"
-            [value]="cancion.artista"
+            [value]="editingId === cancion.id ? cancion.genero.id : cancion.genero.nombre"
             [readonly]="editingId !== cancion.id"
           />
         </td>
@@ -84,7 +84,7 @@
             [id]="'fecha-' + cancion.id"
             type="date"
             class="w-full bg-transparent outline-none"
-            [value]="formatDate(cancion.fecha)"
+            [value]="formatDate(cancion.fechaLanzamiento)"
             [readonly]="editingId !== cancion.id"
           />
         </td>
