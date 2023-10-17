@@ -67,9 +67,11 @@ export class TableGenerosComponent {
   async updateGenero(genero: Genero): Promise<void> {
     const inputNombre = document.getElementById(`nombre-${genero.id}`) as HTMLInputElement
     const inputDescripcion = document.getElementById(`descripcion-${genero.id}`) as HTMLInputElement
+    const inputImagen = document.getElementById(`imagen-${genero.id}`) as HTMLInputElement
 
     genero.nombre = inputNombre.value
     genero.descripcion = inputDescripcion.value
+    genero.imagen = inputImagen.value
 
     if (genero.id === -1) {
       const { id } = await this.generoService.createGenero(genero)

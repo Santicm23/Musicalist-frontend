@@ -9,11 +9,15 @@ import { Subject } from 'rxjs'
 export class CardComponent {
   @Input() id: number = 0
   @Input() title: string = ''
-  @Input() img: string = '../../assets/imgs/placeholder.png'
+  @Input() img: string = ''
   @Input() description: string = ''
   @Output() clickEvent: Subject<number> = new Subject()
 
   constructor() {}
+
+  ngOnInit(): void {
+    if (this.img === '') this.img = '../../assets/imgs/placeholder.png'
+  }
 
   onClick(): void {
     this.clickEvent.next(this.id)

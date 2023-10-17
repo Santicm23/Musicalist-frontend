@@ -4,7 +4,8 @@
       <tr>
         <th scope="col" class="w-1/5 px-6 py-3">Id</th>
         <th scope="col" class="w-1/4 px-6 py-3">Nombre</th>
-        <th scope="col" class="w-1/2 px-6 py-3">Descripción</th>
+        <th scope="col" class="w-2/5 px-6 py-3">Descripción</th>
+        <th scope="col" class="w-1/2 px-6 py-3">Imagen</th>
         <th scope="col" class="w-min flex-row px-6 py-3">
           <button
             class="relative rounded-md bg-green-500 p-2 text-white hover:bg-green-400"
@@ -45,16 +46,16 @@
             maxlength="100"
           />
         </td>
-        <!-- <td class="px-6 py-4">
-          <img *ngIf="editingId !== cancion.id" class="max-h-8" [src]="cancion.imagen" alt="foto" />
+        <td class="px-6 py-4">
+          <img *ngIf="editingId !== genero.id" class="max-h-8" [src]="genero.imagen" alt="foto" />
           <input
-            *ngIf="editingId === cancion.id"
-            [id]="'imagen-' + cancion.id"
+            *ngIf="editingId === genero.id"
+            [id]="'imagen-' + genero.id"
             type="text"
             class="w-full bg-transparent outline-none"
-            [value]="cancion.imagen || ''"
+            [value]="genero.imagen || ''"
           />
-        </td> -->
+        </td>
         <td class="px-6 py-4 [&>*]:mx-1.5">
           <app-button-edit
             (click)="setEditable(genero.id)"

@@ -1,7 +1,7 @@
 <div class="min-h-screen">
   <header class="sticky top-0 z-10 bg-white bg-opacity-30 p-16 backdrop-blur-md">
-    <h1 class="mb-8 text-7xl font-bold tracking-tight text-indigo-500">MusicaList</h1>
-    <h2 class="px-10 text-5xl">Generos</h2>
+    <h1 class="mb-8 text-5xl font-bold tracking-tight text-indigo-500 2xl:text-7xl">MusicaList</h1>
+    <h2 class="px-10 text-4xl 2xl:text-5xl">Generos</h2>
     <app-search></app-search>
     <a
       href="/"
@@ -17,6 +17,7 @@
         [id]="genero.id"
         [title]="genero.nombre"
         [description]="genero.descripcion || ''"
+        [img]="genero.imagen || ''"
         (clickEvent)="onClick($event)"
       ></app-card>
     </div>
