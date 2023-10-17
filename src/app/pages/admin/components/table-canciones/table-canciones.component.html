@@ -75,7 +75,13 @@
             [id]="'genero-' + cancion.id"
             [type]="editingId === cancion.id ? 'number' : 'text'"
             class="w-full bg-transparent outline-none"
-            [value]="editingId === cancion.id ? cancion.genero.id : cancion.genero.nombre"
+            [value]="
+              editingId === cancion.id
+                ? cancion.genero.id !== -1
+                  ? cancion.genero.id
+                  : ''
+                : cancion.genero.nombre
+            "
             [readonly]="editingId !== cancion.id"
           />
         </td>
