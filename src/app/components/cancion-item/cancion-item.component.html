@@ -14,7 +14,8 @@
     </span>
   </div>
   <span class="my-auto">{{ cancion?.duracion }}</span>
-  <button class="group">
+  <span class="my-auto ml-4">{{ cancion?.numLikes }}</span>
+  <button class="group" (click)="toggleStarCancion()">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="16"

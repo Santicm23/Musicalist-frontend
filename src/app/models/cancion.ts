@@ -9,6 +9,7 @@ export class Cancion {
     public duracion: string,
     public genero: Genero,
     public fechaLanzamiento: Date,
+    public numLikes: number = 0,
     public imagen?: string
   ) {}
 }

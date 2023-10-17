@@ -59,13 +59,6 @@ export class GeneroComponent {
     return this.cancionesVotadas.some(c => c.id === id)
   }
 
-  async votarCancion(id: number): Promise<void> {
-    try {
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
   goBack(): void {
     window.history.back()
   }

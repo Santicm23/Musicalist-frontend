@@ -27,4 +27,14 @@ export class UsuarioService {
     const res = await axios.get(`http://localhost:8080/usuario/${id}/canciones`)
     return res.data
   }
+
+  async votarCancion(uid: number, cid: number): Promise<void> {
+    const res = await axios.post(`http://localhost:8080/usuario/${uid}/cancion/${cid}`)
+    return res.data
+  }
+
+  async desvotarCancion(uid: number, cid: number): Promise<void> {
+    const res = await axios.delete(`http://localhost:8080/usuario/${uid}/cancion/${cid}`)
+    return res.data
+  }
 }

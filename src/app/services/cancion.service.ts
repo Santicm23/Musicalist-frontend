@@ -31,14 +31,4 @@ export class CancionService {
     const response = await axios.get(`http://localhost:8080/genero/${id}/canciones`)
     return response.data
   }
-
-  async votarCancion(id: number): Promise<Cancion> {
-    const response = await axios.put(`http://localhost:8080/cancion/${id}/like`)
-    return response.data
-  }
-
-  async desvotarCancion(id: number): Promise<Cancion> {
-    const response = await axios.put(`http://localhost:8080/cancion/${id}/dislike`)
-    return response.data
-  }
 }
