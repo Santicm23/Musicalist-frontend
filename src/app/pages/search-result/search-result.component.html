@@ -1,0 +1,36 @@
+<button
+  class="sticky left-8 top-8 z-10 cursor-pointer rounded-md bg-indigo-600 p-2 pt-1 text-white hover:bg-indigo-500"
+  (click)="goBack()"
+>
+  ←
+</button>
+<header class="fixed top-0 -z-20 h-2/3 w-full">
+  <h1 class="absolute bottom-32 left-8 text-7xl font-bold tracking-tight text-indigo-500">
+    Búsqueda
+  </h1>
+  <div class="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white"></div>
+  <img
+    class="m-auto h-full w-full overflow-hidden object-cover"
+    src="../../../assets/imgs/placeholder.png"
+    alt="img"
+  />
+</header>
+<main class="absolute top-1/2 w-full p-8">
+  <div class="mx-auto flex w-2/3 overflow-hidden rounded-lg bg-white shadow-md">
+    <div class="flex w-full flex-col p-5">
+      <div class="mb-2 flex items-center justify-between border-b pb-1">
+        <span class="text-base font-semibold uppercase text-gray-700">Canciones</span>
+        <img
+          class="w-4 cursor-pointer"
+          src="https://p.kindpng.com/picc/s/152-1529312_filter-ios-filter-icon-png-transparent-png.png"
+        />
+      </div>
+
+      <app-cancion-item
+        *ngFor="let cancion of canciones"
+        [cancion]="cancion"
+        [starred]="cancionVotada(cancion.id)"
+      ></app-cancion-item>
+    </div>
+  </div>
+</main>

@@ -23,7 +23,8 @@ import { ModalConfirmComponent } from './pages/admin/components/modal-confirm/mo
 import { CardComponent } from './pages/home/components/card/card.component'
 import { SearchComponent } from './pages/home/components/search/search.component';
 import { GeneroComponent } from './pages/genero/genero.component';
-import { CancionItemComponent } from './components/cancion-item/cancion-item.component'
+import { CancionItemComponent } from './components/cancion-item/cancion-item.component';
+import { SearchResultComponent } from './pages/search-result/search-result.component'
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { CancionItemComponent } from './components/cancion-item/cancion-item.com
     SearchComponent,
     GeneroComponent,
     CancionItemComponent,
+    SearchResultComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],

@@ -1,4 +1,8 @@
-<form class="absolute inset-1/2 flex min-w-fit -translate-x-1/2 -translate-y-1/2 items-center">
+<form
+  [formGroup]="searchForm"
+  class="absolute inset-1/2 flex min-w-fit -translate-x-1/2 -translate-y-1/2 items-center"
+  (ngSubmit)="onSubmit()"
+>
   <div class="group relative">
     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
       <svg
@@ -21,6 +25,7 @@
       class="block w-[40rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 outline-none focus:border-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500"
       placeholder="Buscar por nombre, artista, album o genero"
       required
+      [formControl]="searchForm.controls.search"
     />
   </div>
   <button

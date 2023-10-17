@@ -6,6 +6,7 @@ import { SignupComponent } from './pages/signup/signup.component'
 import { HomeComponent } from './pages/home/home.component'
 import { AdminComponent } from './pages/admin/admin.component'
 import { GeneroComponent } from './pages/genero/genero.component'
+import { SearchResultComponent } from './pages/search-result/search-result.component'
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -13,6 +14,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'home/:uid', component: HomeComponent },
   { path: 'home/:uid/genero/:gid', component: GeneroComponent },
+  { path: 'home/:uid/search', component: SearchResultComponent },
+  { path: 'home/:uid/search/:filtro', component: SearchResultComponent },
   { path: 'admin/:uid', component: AdminComponent },
   { path: '**', component: NotFoundComponent },
 ]

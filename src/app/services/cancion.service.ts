@@ -31,4 +31,9 @@ export class CancionService {
     const response = await axios.get(`http://localhost:8080/genero/${id}/canciones`)
     return response.data
   }
+
+  async buscarCanciones(filtro: string): Promise<Array<Cancion>> {
+    const response = await axios.get(`http://localhost:8080/buscar/canciones/${filtro}`)
+    return response.data
+  }
 }
