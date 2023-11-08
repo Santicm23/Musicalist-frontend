@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core'
+import { UsuarioService } from 'src/app/services/usuario.service'
 
 @Component({
   selector: 'app-header-admin',
@@ -13,10 +14,14 @@ export class HeaderAdminComponent {
   @Output() eventSelected: EventEmitter<'generos' | 'canciones'> = new EventEmitter()
   selected: 'generos' | 'canciones' = 'generos'
 
-  constructor() {}
+  constructor(private usuarioService: UsuarioService) {}
 
   setSelected(selected: 'generos' | 'canciones') {
     this.selected = selected
     this.eventSelected.emit(selected)
+  }
+
+  logout() {
+    this.usuarioService.logout()
   }
 }

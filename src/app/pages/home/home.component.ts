@@ -37,4 +37,8 @@ export class HomeComponent {
     const url = this.router.url
     this.router.navigate([`${url}/genero/${id}`])
   }
+
+  logout(): void {
+    this.generoService.logout()
+  }
 }

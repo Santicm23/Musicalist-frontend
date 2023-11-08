@@ -3,12 +3,12 @@
     <h1 class="mb-8 text-5xl font-bold tracking-tight text-indigo-500 2xl:text-7xl">MusicaList</h1>
     <h2 class="px-10 text-4xl 2xl:text-5xl">Generos</h2>
     <app-search></app-search>
-    <a
-      href="/"
+    <button
+      (click)="logout()"
       class="absolute right-[25px] top-1/2 -translate-y-1/2 rounded-md bg-indigo-600 p-2 text-white hover:bg-indigo-500"
     >
       Logout
-    </a>
+    </button>
   </header>
   <div class="flex items-center justify-center pb-8">
     <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
