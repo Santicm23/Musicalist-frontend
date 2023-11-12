@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Subject } from 'rxjs'
 import { Usuario } from 'src/app/models/usuario'
+import { LocalStorageService } from 'src/app/services/local-storage.service'
 import { UsuarioService } from 'src/app/services/usuario.service'
 
 @Component({
@@ -24,8 +25,23 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private localStorageService: LocalStorageService
   ) {}
+
+  ngOnInit(): void {
+    const token = this.localStorageService.getToken()
+
+    if (!token) return
+
+    this.usuarioService.getInfoUsuario(token).then(user => {
+      if (user.admin) {
+        this.router.navigate([`/admin/${user.id}`])
+      } else {
+        this.router.navigate([`/home/${user.id}`])
+      }
+    })
+  }
 
   async onSubmit() {
     if (this.loginForm.valid) {

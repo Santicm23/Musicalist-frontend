@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Cancion } from '../models/cancion'
 import { Router } from '@angular/router'
 import { LocalStorageService } from './local-storage.service'
+import { UsuarioService } from './usuario.service'
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +14,14 @@ export class CancionService {
   })
 
   constructor(
-    private router: Router,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private usuarioService: UsuarioService
   ) {}
 
   async getCanciones(): Promise<Array<Cancion>> {
-    const token = this.localStorageService.getToken()
+    this.usuarioService.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     const response = await this.axiosInstance.get('http://localhost:8080/canciones', {
       headers: {
@@ -31,9 +32,9 @@ export class CancionService {
   }
 
   async createCancion(cancion: Cancion): Promise<Cancion> {
-    const token = this.localStorageService.getToken()
+    this.usuarioService.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     const response = await this.axiosInstance.post('http://localhost:8080/cancion', cancion, {
       headers: {
@@ -44,9 +45,9 @@ export class CancionService {
   }
 
   async updateCancion(cancion: Cancion): Promise<Cancion> {
-    const token = this.localStorageService.getToken()
+    this.usuarioService.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     const response = await this.axiosInstance.put(
       `http://localhost:8080/cancion/${cancion.id}`,
@@ -61,9 +62,9 @@ export class CancionService {
   }
 
   async deleteCancion(id: number): Promise<void> {
-    const token = this.localStorageService.getToken()
+    this.usuarioService.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     await this.axiosInstance.delete(`http://localhost:8080/cancion/${id}`, {
       headers: {
@@ -73,9 +74,9 @@ export class CancionService {
   }
 
   async getCancionesByGenero(id: number): Promise<Array<Cancion>> {
-    const token = this.localStorageService.getToken()
+    this.usuarioService.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     const response = await this.axiosInstance.get(`http://localhost:8080/genero/${id}/canciones`, {
       headers: {
@@ -86,9 +87,9 @@ export class CancionService {
   }
 
   async buscarCanciones(filtro: string): Promise<Array<Cancion>> {
-    const token = this.localStorageService.getToken()
+    this.usuarioService.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     const response = await this.axiosInstance.get(
       `http://localhost:8080/buscar/canciones/${filtro}`,
@@ -99,11 +100,5 @@ export class CancionService {
       }
     )
     return response.data
-  }
-
-  async logout(): Promise<void> {
-    this.localStorageService.deleteToken()
-
-    this.router.navigate(['/'])
   }
 }

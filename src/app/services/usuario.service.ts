@@ -9,8 +9,12 @@ import { Router } from '@angular/router'
   providedIn: 'root',
 })
 export class UsuarioService {
-  private axiosPublicInstance = axios.create({
+  private axiosAuthPublicInstance = axios.create({
     baseURL: 'http://localhost:8081/public',
+  })
+
+  private axiosAuthInstance = axios.create({
+    baseURL: 'http://localhost:8081',
   })
 
   private axiosInstance: AxiosInstance = axios.create({
@@ -23,20 +27,17 @@ export class UsuarioService {
   ) {}
 
   async getInfoUsuario(token: String): Promise<Usuario> {
-    const axiosTemp = axios.create({
-      baseURL: 'http://localhost:8081',
+    const res = await this.axiosAuthInstance.post('/info', null, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
 
-    const res = await axiosTemp.post('/info')
-
     return res.data
   }
 
   async login({ correo, contrasena }: Usuario): Promise<Usuario> {
-    const res = await this.axiosPublicInstance.post('/login', { correo, contrasena })
+    const res = await this.axiosAuthPublicInstance.post('/login', { correo, contrasena })
 
     const { token } = res.data
 
@@ -46,7 +47,7 @@ export class UsuarioService {
   }
 
   async registro({ nombre, correo, contrasena }: Usuario): Promise<Usuario> {
-    const res = await this.axiosPublicInstance.post('/usuario', {
+    const res = await this.axiosAuthPublicInstance.post('/usuario', {
       nombre,
       correo,
       contrasena,
@@ -59,10 +60,30 @@ export class UsuarioService {
     return await this.getInfoUsuario(token)
   }
 
-  async getCancionesByUsuario(id: number): Promise<Array<Cancion>> {
+  async renovarToken(): Promise<void> {
     const token = this.localStorageService.getToken()
 
     if (!token) this.logout()
+
+    try {
+      const res = await this.axiosAuthInstance.post('/reniew', null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      const { token: newToken } = res.data
+
+      this.localStorageService.saveToken(newToken)
+    } catch (error) {
+      this.logout()
+    }
+  }
+
+  async getCancionesByUsuario(id: number): Promise<Array<Cancion>> {
+    this.renovarToken()
+
+    const token = this.localStorageService.getToken()
 
     const res = await this.axiosInstance.get(`/usuario/${id}/canciones`, {
       headers: {
@@ -73,9 +94,9 @@ export class UsuarioService {
   }
 
   async votarCancion(uid: number, cid: number): Promise<void> {
-    const token = this.localStorageService.getToken()
+    this.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     const res = await this.axiosInstance.post(`/usuario/${uid}/cancion/${cid}`, {
       headers: {
@@ -86,9 +107,9 @@ export class UsuarioService {
   }
 
   async desvotarCancion(uid: number, cid: number): Promise<void> {
-    const token = this.localStorageService.getToken()
+    this.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     const res = await this.axiosInstance.delete(`/usuario/${uid}/cancion/${cid}`, {
       headers: {

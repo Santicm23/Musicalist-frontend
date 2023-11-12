@@ -3,6 +3,7 @@ import { Subject } from 'rxjs'
 import { Cancion } from 'src/app/models/cancion'
 import { Genero } from 'src/app/models/genero'
 import { CancionService } from 'src/app/services/cancion.service'
+import { GeneroService } from 'src/app/services/genero.service'
 
 @Component({
   selector: 'app-table-canciones',
@@ -17,7 +18,10 @@ export class TableCancionesComponent {
   editingId?: number
   deletingId?: number
 
-  constructor(private cancionService: CancionService) {}
+  constructor(
+    private cancionService: CancionService,
+    private generoService: GeneroService
+  ) {}
 
   ngOnInit(): void {
     this.readCanciones()
@@ -87,11 +91,16 @@ export class TableCancionesComponent {
     const inputFecha = document.getElementById(`fecha-${cancion.id}`) as HTMLInputElement
     const inputImagen = document.getElementById(`imagen-${cancion.id}`) as HTMLInputElement
 
+    let newGenero = false
     cancion.nombre = inputNombre.value
     cancion.artista = inputArtista.value
     cancion.album = inputAlbum.value
     cancion.duracion = inputDuracion.value
-    cancion.genero.id = Number(inputGenero.value)
+
+    if (cancion.genero.id !== Number(inputGenero.value)) {
+      newGenero = true
+      cancion.genero.id = Number(inputGenero.value)
+    }
     cancion.fechaLanzamiento = new Date(inputFecha.value)
     cancion.imagen = inputImagen.value
 
@@ -100,6 +109,10 @@ export class TableCancionesComponent {
       cancion.id = cancionTemp.id
     } else {
       await this.cancionService.updateCancion(cancion)
+      if (newGenero) {
+        const genero = await this.generoService.getGeneroById(cancion.genero.id)
+        cancion.genero = genero
+      }
     }
 
     this.editingId = undefined

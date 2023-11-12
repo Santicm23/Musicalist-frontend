@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Genero } from 'src/app/models/genero'
 import { GeneroService } from 'src/app/services/genero.service'
+import { UsuarioService } from 'src/app/services/usuario.service'
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,8 @@ export class HomeComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private generoService: GeneroService
+    private generoService: GeneroService,
+    private usuarioService: UsuarioService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,6 @@ export class HomeComponent {
   }
 
   logout(): void {
-    this.generoService.logout()
+    this.usuarioService.logout()
   }
 }

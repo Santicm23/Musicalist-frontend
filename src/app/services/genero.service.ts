@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import axios from 'axios'
 import { Genero } from '../models/genero'
-import { Router } from '@angular/router'
 import { LocalStorageService } from './local-storage.service'
+import { UsuarioService } from './usuario.service'
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +13,14 @@ export class GeneroService {
   })
 
   constructor(
-    private router: Router,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private usuarioService: UsuarioService
   ) {}
 
   async getGeneros(): Promise<Array<Genero>> {
-    const token = this.localStorageService.getToken()
+    this.usuarioService.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     const res = await this.axiosInstance.get('http://localhost:8080/generos', {
       headers: {
@@ -31,9 +31,9 @@ export class GeneroService {
   }
 
   async getGeneroById(id: number): Promise<Genero> {
-    const token = this.localStorageService.getToken()
+    this.usuarioService.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     const res = await this.axiosInstance.get(`http://localhost:8080/genero/${id}`, {
       headers: {
@@ -44,9 +44,9 @@ export class GeneroService {
   }
 
   async createGenero(genero: Genero): Promise<Genero> {
-    const token = this.localStorageService.getToken()
+    this.usuarioService.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     const res = await this.axiosInstance.post('http://localhost:8080/genero', genero, {
       headers: {
@@ -57,9 +57,9 @@ export class GeneroService {
   }
 
   async updateGenero(genero: Genero): Promise<Genero> {
-    const token = this.localStorageService.getToken()
+    this.usuarioService.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     const res = await this.axiosInstance.put(`http://localhost:8080/genero/${genero.id}`, genero, {
       headers: {
@@ -70,20 +70,14 @@ export class GeneroService {
   }
 
   async deleteGenero(id: number): Promise<void> {
-    const token = this.localStorageService.getToken()
+    this.usuarioService.renovarToken()
 
-    if (!token) this.logout()
+    const token = this.localStorageService.getToken()
 
     await this.axiosInstance.delete(`http://localhost:8080/genero/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-  }
-
-  async logout(): Promise<void> {
-    this.localStorageService.deleteToken()
-
-    this.router.navigate(['/'])
   }
 }
